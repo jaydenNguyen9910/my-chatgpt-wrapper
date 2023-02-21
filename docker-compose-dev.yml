@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+    nginx:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+            - 80:80
+        volumes:
+            - static_volume:/app/chatgpt_server/chatgpt_server/django_static
+            - ./docker/nginx/development:/etc/nginx/conf.d
+        depends_on:
+            - chatgpt_server
+    chatgpt_server:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/chatgpt_server/Dockerfile
+        volumes:
+
+        entrypoint: /app/docker/chatgpt_server/wsgi-entrypoint.sh
+        volumes:
+            - static_volume:/app/chatgpt_server/chatgpt_server/django_static
+        expose:
+            - 8000
+
+volumes:
+    static_volume: {}
