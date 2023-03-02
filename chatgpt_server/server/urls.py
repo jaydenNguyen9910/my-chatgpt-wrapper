@@ -18,7 +18,7 @@ from rest_framework.authtoken import views as token_views
 
 urlpatterns = [
     path('chatgpt', views.ChatGPTAPI.as_view()),
-    path('gpt3', views.GPT3API.as_view()),
+    # path('gpt3', views.GPT3API.as_view()),
     path("user", views.UserDetailAPI.as_view()),
     path('register', views.RegisterUserAPI.as_view()),
     path('login', token_views.obtain_auth_token)

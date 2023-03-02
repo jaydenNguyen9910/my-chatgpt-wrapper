@@ -25,6 +25,17 @@ services:
             - static_volume:/app/chatgpt_server/chatgpt_server/django_static
         expose:
             - 8000
+        depends_on:
+            - db
+    db:
+        image: postgres:13
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+        environment:
+            - "POSTGRES_HOST_AUTH_METHOD=trust"
 
 volumes:
     static_volume: {}
+    postgres_data:

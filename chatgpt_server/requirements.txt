@@ -28,8 +28,9 @@ markdownify==0.11.6
 MarkupSafe==2.1.2
 multidict==6.0.4
 oauthlib==3.2.2
-openai==0.26.5
+openai==0.27.0
 outcome==1.2.0
+psycopg2-binary==2.9.3
 pycparser==2.21
 Pygments==2.14.0
 PyJWT==2.6.0

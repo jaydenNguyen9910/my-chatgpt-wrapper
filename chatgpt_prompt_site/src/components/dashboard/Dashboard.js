@@ -54,23 +54,23 @@ const Dashboard = (props) => {
             setMessages([...messages, newMessage, chatbotMessage]);
         })
         .catch(error => {
-            toastOnError(error);
-            axios.post("/gpt3",
-                {
-                    message: inputValue,
-                },
-                {
-                    "Accept": "text/event-stream",
-                    "Content-Type": "application/json",
-                    "Accept-Language": "en-US,en;q=0.9",
-                    "Authorization": `TOKEN ${token}`
-                }
-            ).then(response => {
-                const data = response.data;
-                const chatbotMessage = { text: data, isUser: false };
-                setMessages([...messages, newMessage, chatbotMessage]);
-            })
-            .catch(error => toastOnError(error))
+            toastOnError("ChatGPT is now at its peak. Please try again later");
+            // axios.post("/gpt3",
+            //     {
+            //         message: inputValue,
+            //     },
+            //     {
+            //         "Accept": "text/event-stream",
+            //         "Content-Type": "application/json",
+            //         "Accept-Language": "en-US,en;q=0.9",
+            //         "Authorization": `TOKEN ${token}`
+            //     }
+            // ).then(response => {
+            //     const data = response.data;
+            //     const chatbotMessage = { text: data, isUser: false };
+            //     setMessages([...messages, newMessage, chatbotMessage]);
+            // })
+            // .catch(error => toastOnError(error))
         })
         .finally(() => {
             setIsLoading(false);
