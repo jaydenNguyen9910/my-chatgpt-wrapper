@@ -1,3 +1,4 @@
 .env
+venv
 node_module3gi
 db.sqlite3

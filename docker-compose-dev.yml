@@ -18,9 +18,9 @@ services:
         build:
             context: .
             dockerfile: ./docker/chatgpt_server/Dockerfile
-        volumes:
-
         entrypoint: /app/docker/chatgpt_server/wsgi-entrypoint.sh
+        env_file:
+            - ./.env
         volumes:
             - static_volume:/app/chatgpt_server/chatgpt_server/django_static
         expose:
