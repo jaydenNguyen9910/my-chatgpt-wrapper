@@ -33,7 +33,7 @@ export const signupNewUser = userData => dispatch => {
       dispatch({ type: CREATE_USER_SUCCESS });
     })
     .catch(error => {
-      if (error.resposne) {
+      if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
         toast.error(JSON.stringify(error.response.data));

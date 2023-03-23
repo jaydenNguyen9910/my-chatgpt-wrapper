@@ -15,6 +15,8 @@ import openai
 import random
 import os
 
+# OPEN AI APIs max tokens amount is 4096, but 3000 should be a safer threshold for our APIs
+MAX_TOKENS = 3000
 # Accounts to be distributed to users
 env_accounts = json.loads(os.environ["accounts"])
 accounts = []
@@ -45,21 +47,35 @@ class ChatGPTAPI(APIView):
         openai.api_key = api_key
 
         # Generate prompt
+        user_msg = [{"role": "user", "content": "{}".format(msg)}]
         history = []
         if user.id in chatgpt_user_history:
             history = chatgpt_user_history[user.id]
-        current_prompt = chatgpt_prompt + history + [{"role": "user", "content": "{}".format(msg)}]
+            current_prompt = history + user_msg
+        else:
+            current_prompt = chatgpt_prompt + user_msg
 
         # Ask
-        completion = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=current_prompt,
-        )
+        try:
+            completion = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=current_prompt,
+            )
+        except openai.error.InvalidRequestError:
+            return Response("Your request was malformed or missing some required parameters, such as a token or an input.", status=status.HTTP_400_BAD_REQUEST)
+        except openai.error.APIConnectionError:
+            return Response("The engine is currently overloaded, please try again later", status=status.HTTP_429_TOO_MANY_REQUESTS)
+
         response = completion['choices'][0]['message']['content']
+        current_token_amount = completion['usage']['total_tokens']
 
         # Store conversation
-        appended_conversation = current_prompt + [{"role": "assistant", "content": response}]
-        chatgpt_user_history[user.id] = appended_conversation
+        chatgpt_msg = [{"role": "assistant", "content": response}]
+        if current_token_amount > MAX_TOKENS:
+            chatgpt_user_history[user.id] = chatgpt_prompt + user_msg + chatgpt_msg
+        else:
+            appended_conversation = current_prompt + chatgpt_msg
+            chatgpt_user_history[user.id] = appended_conversation
 
         return Response(response, status=status.HTTP_200_OK)
 

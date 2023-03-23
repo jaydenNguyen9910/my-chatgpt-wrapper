@@ -14,67 +14,94 @@
  * limitations under the License.
  */
 
+.nav-bar {
+    background-color: rgb(32,33,35)
+}
 .chat-wrapper {
-    text-align: center;
+    width: 100%;
+    min-height: 651px;
+    background-color: rgba(52,53,65,1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex: 1;
+    padding-top: 0px;
 }
 .chat-box {
-    width: 1000px;
-    height: 500px;
-    border: 1px solid black;
-    margin: auto;
-    margin-top: 20px;
-    padding: 10px;
+    width: 100%;
+    height: 550px;
+    align-items: center;
+    justify-content: center;
     overflow: scroll;
 }
-.chat-box .user-message {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #0084ff;
-    display: inline-block;
-    word-wrap: break-word;
-    width: auto;
-    text-align: left;
-}
-.chat-box .chatgpt-message {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #3d4042;
-    color: white;
-    display: inline-block;
-    word-wrap: break-word;
-    width: auto;
-    text-align: left;
-}
 .chat-box .chatgpt-message-container {
-    text-align: left;
+    background: rgba(68,70,84,1);
+    padding: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
 }
 .chat-box .user-message-container {
-    text-align: right;
+    background-color: rgba(52,53,65,1);
+    padding: 1rem;
+    padding-left: 5rem;
+    padding-right: 5rem;
+}
+.chat-box .user-message {
+    white-space: pre-wrap;
+    display: block;
+    color: #d1d5db;
+    margin: 1em;
+}
+.chat-box .chatgpt-message {
+
+    margin: 1em;
+    white-space: pre-wrap;
+    overflow: hidden;
+    color: #d1d5db;
 }
 .chat-input {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 16px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    height: 40px;
+    position: fixed;
+    bottom: 35px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    justify-content: space-between;
+    background-color: rgba(64,65,79,1);
+    border-radius: 10px;
 }
 .input-field {
-    width: 600px;
-    padding: 10px;
-    margin-right: 10px;
-    font-size: 16px;
+    width: 95%;
+    color: #d1d5db;
+    background: transparent;
+    border: none;
+    white-space: pre-wrap;
+}
+.input-field:focus  {
+    outline: none;
 }
 .send-button {
-    padding: 10px 20px;
-    background-color: lightgray;
-    border-radius: 10px;
-    border: 1px solid black;
-    font-size: 16px;
+    rotate: 90deg;
+    color: rgba(172,172,190,1);
     cursor: pointer;
 }
+.disclaimer {
+    bottom: 10px;
+    position: fixed;
+    color: hsla(0,0%,100%,.5);
+    font-size: .75rem;
+    line-height: 1rem;
+    text-align: center;
+}
+
 .loading-spinner {
     position: fixed;
     top: 0;

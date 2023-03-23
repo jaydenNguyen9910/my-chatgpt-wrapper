@@ -30,7 +30,6 @@ import { signupNewUser } from "./SignupActions"; // new import
 class Signup extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       username: "",
       password: ""
