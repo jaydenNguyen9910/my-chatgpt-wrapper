@@ -33,6 +33,10 @@ const Dashboard = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const chatBoxRef = useRef(null);
 
+    const handleInputChange = (e) => {
+        setInputValue(e.target.value);
+    }
+
     const handleSendMessage = async () => {
         setIsLoading(true);
         const newMessage = { text: inputValue, isUser: true };
@@ -82,6 +86,22 @@ const Dashboard = (props) => {
           navigate('/login');
         }
     }, [isAuthenticated]);
+
+    useEffect(() => {
+        const enterKeyHandler = event => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+
+                handleSendMessage();
+            }
+        }
+
+        document.addEventListener('keydown', enterKeyHandler);
+
+        return () => {
+            document.removeEventListener('keydown', enterKeyHandler);
+        }
+    }, [handleSendMessage])
 
     return (
         <div>
@@ -137,9 +157,7 @@ const Dashboard = (props) => {
                         type="text"
                         placeholder="Type your message here..."
                         value={inputValue}
-                        onChange={event => {
-                            setInputValue(event.target.value);
-                        }}
+                        onChange={handleInputChange}
                     />
                     <svg
                         className="send-button h-4 w-4 rotate-90"
