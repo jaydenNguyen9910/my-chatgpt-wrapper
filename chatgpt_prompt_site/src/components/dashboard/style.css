@@ -15,11 +15,12 @@
  */
 
 .nav-bar {
+    width: 100%;
     background-color: rgb(32,33,35)
 }
 .chat-wrapper {
     width: 100%;
-    min-height: 651px;
+    height: 100vh;
     background-color: rgba(52,53,65,1);
     display: flex;
     flex-direction: column;
@@ -30,22 +31,26 @@
 }
 .chat-box {
     width: 100%;
-    height: 100vh;
+    height: 78%;
     align-items: center;
     justify-content: center;
     overflow: scroll;
 }
 .chat-box .chatgpt-message-container {
+    width: 100%;
     background: rgba(68,70,84,1);
     padding: 1rem;
     padding-left: 5rem;
     padding-right: 5rem;
+    margin: 0px;
 }
 .chat-box .user-message-container {
+    width: 100%;
     background-color: rgba(52,53,65,1);
     padding: 1rem;
     padding-left: 5rem;
     padding-right: 5rem;
+    margin: 0px;
 }
 .chat-box .user-message {
     white-space: pre-wrap;

@@ -105,16 +105,16 @@ const Dashboard = (props) => {
 
     return (
         <div>
-            <Navbar className="nav-bar">
-                <Navbar.Text style={{"padding-left": 10, "color": "#d1d5db"}}>
-                    User: <b>{user.username}</b>
-                </Navbar.Text>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end" style={{"padding-right": 10, "color": "#d1d5db"}}>
-                    <Nav.Link onClick={props.logout}>Logout</Nav.Link>
-                </Navbar.Collapse>
-            </Navbar>
             <div className="chat-wrapper">
+                <Navbar className="nav-bar">
+                    <Navbar.Text style={{"padding-left": 10, "color": "#d1d5db"}}>
+                        User: <b>{user.username}</b>
+                    </Navbar.Text>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse className="justify-content-end" style={{"padding-right": 10, "color": "#d1d5db"}}>
+                        <Nav.Link onClick={props.logout}>Logout</Nav.Link>
+                    </Navbar.Collapse>
+                </Navbar>
                 <div className="chat-box" ref={chatBoxRef}>
                     {messages.map((message, index) => (
                         <Row key={index} className={`${message.isUser ? 'user' : 'chatgpt'}-message-container`}>
