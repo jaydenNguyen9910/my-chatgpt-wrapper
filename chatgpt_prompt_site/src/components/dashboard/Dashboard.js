@@ -21,7 +21,6 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../login/LoginActions";
 import axios from "axios";
 import {  toastOnError } from "../../utils/Utils";
-import { toast } from "react-toastify";
 
 
 const Dashboard = (props) => {
@@ -59,18 +58,7 @@ const Dashboard = (props) => {
             setMessages([...messages, newMessage, chatbotMessage]);
         })
         .catch(error => {
-            if (error.response) {
-                // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                toast.error(JSON.stringify(error.response.data));
-              } else if (error.message) {
-                // the error message is available,
-                // let's display it on error toast
-                toast.error(JSON.stringify(error.message));
-              } else {
-                // strange error, just show it
-                toastOnError("Chatbot is now at its peak. Please try again later!");
-              }
+            toastOnError(error);
         })
         .finally(() => {
             setIsLoading(false);
